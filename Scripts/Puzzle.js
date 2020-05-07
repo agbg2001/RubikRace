@@ -5,6 +5,8 @@
 // center 3 by 3 needs to check against the goal
 // colours : white, blue, red, orange, yellow, green
 
+import goalBoard from "./Goal.js";
+
 const canvas = document.getElementById("puzzle-canvas");
 const context = canvas.getContext("2d");
 
@@ -12,9 +14,16 @@ function drawRect(x, y, w, h, color = "black") {
     context.fillStyle = color;
     context.fillRect(x, y, w, h);
 }
-function drawText(text, x, y, color = "black") {
+function drawRectOutline(x, y, w, h, color = "black", thickness = 1) {
+    context.strokeStyle = color;
+    context.lineWidth = thickness;
+    context.beginPath();
+    context.rect(x, y, w, h);
+    context.stroke();
+}
+function drawText(text, x, y, size = 20, color = "black", font = "Trebuchet MS") {
     context.fillStyle = color;
-    context.font = "20px Trebuchet MS";
+    context.font = `${size}px ${font}`;
     context.fillText(text, x, y);
 }
 
@@ -22,6 +31,9 @@ const board = {
     squareSize: 120,
     boardState: [[], [], [], [], []],
     emptySquareLocation: [],
+    complete: false,
+    timeStarted: 0,
+    timeElapsed: 0,
     randomize: function() {
         const availableColours = ['empty', 'white', 'blue', 'red', 'orange', 'yellow', 'green'];//gray indicates empty square
         const numberOfColours = [0, 0, 0, 0, 0, 0, 0];
@@ -53,18 +65,22 @@ const board = {
             drawRect(col*this.squareSize+1, row*this.squareSize+1,
                 this.squareSize-2, this.squareSize-2, colour);
         }
-        context.strokeStyle = "rgba(0, 0, 0, 0.3)"
-        context.lineWidth = 25;
-        context.beginPath();
-        context.rect(120, 120, 360, 360);
-        context.stroke();
+        drawRectOutline(120, 120, 360, 360, 'rgba(0, 0, 0, 0.3)', 25);//middle 9 squares outline
+
+        this.complete = this.matches(goalBoard);//winning message
+        if (this.complete) {
+            drawRect(190, 270, 220, 60, 'white');
+            drawRectOutline(190, 270, 220, 60, 'black', 5);
+            drawText("YOU WIN", 200, 320, 50);
+        }
     },
     move: function(row, col) {//attempts to make move
         const emptyRow = this.emptySquareLocation[0];
         const emptyCol = this.emptySquareLocation[1];
-        if (row >= 0 && row <=4 && col >= 0 && col <= 4) {
+        if (!this.complete && row >= 0 && row <=4 && col >= 0 && col <= 4) {
             if (row === emptyRow && Math.abs(emptyCol - col) === 1 ||//if on same row and adjacent
                 col === emptyCol && Math.abs(emptyRow - row) === 1) {//if on same col and adjacent
+                if (!this.timeStarted) this.timeStarted = new Date();
                 this.swap(row, col, emptyRow, emptyCol);
                 this.emptySquareLocation = [row, col];
             }
@@ -75,11 +91,26 @@ const board = {
         this.boardState[row1][col1] = this.boardState[row2][col2];
         this.boardState[row2][col2] = temp;
     },
-    verify: function(goal) {//checks if middle 9 squares are same sequence as goal pattern
-        return false;
+    matches: function(goal) {//checks if middle 9 squares are same sequence as goal pattern
+        const goalState = goal.goalBoardState;
+        for (let i = 0; i < 9; i ++) {
+            const row = Math.floor(i / 3);
+            const col = i % 3;
+            if (this.boardState[row+1][col+1] !== goalState[row][col]) {//if there is any mismatch
+                return false;
+            }
+        }
+        return true;//no mismatch found
+    },
+    reset: function() {
+        this.randomize();
+        this.complete = false;
+        this.timeStarted = 0;
+        this.timeElapsed = 0;
     }
 }
 
+canvas.addEventListener("click", mouseClicked);
 function mouseClicked(evt) {
     const rect = canvas.getBoundingClientRect();
     const mouseX = evt.clientX - rect.left;
@@ -90,7 +121,13 @@ function mouseClicked(evt) {
     board.show();
 }
 
-canvas.addEventListener("click", mouseClicked);
+setInterval(function() {//increment timer
+    if (board.timeStarted && !board.complete)
+        board.timeElapsed = (new Date() - board.timeStarted)/1000;
+    document.getElementById("timer").innerHTML = board.timeElapsed;
+}, 20);
 
-board.randomize();
+board.reset();
 board.show();
+
+export default board;
