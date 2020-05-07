@@ -21,16 +21,24 @@ function drawText(text, x, y, color = "black") {
 const board = {
     squareSize: 120,
     boardState: [[], [], [], [], []],
+    emptySquareLocation: [],
     randomize: function() {
-        const availableColours = ['gray', 'white', 'blue', 'red', 'orange', 'yellow', 'green'];//gray indicates empty square
+        const availableColours = ['empty', 'white', 'blue', 'red', 'orange', 'yellow', 'green'];//gray indicates empty square
         const numberOfColours = [0, 0, 0, 0, 0, 0, 0];
         for (let i = 0; i < 25; i++) {
-            const random = Math.floor(Math.random() * availableColours.length);
             const row = Math.floor(i / 5);
             const col = i % 5;
-            this.boardState[row][col] = availableColours[random];
-            numberOfColours[random]++;
-            if (numberOfColours[random] >= 4 || availableColours[random] === 'gray') {
+
+            const random = Math.floor(Math.random() * availableColours.length);
+            this.boardState[row][col] = availableColours[random];//add colour to board state
+            numberOfColours[random]++;//counts number of colours already on board, max 1 for empty and max 4 for rest
+
+            if (availableColours[random] === 'empty') {
+                this.emptySquareLocation[0] = row;
+                this.emptySquareLocation[1] = col;
+            }
+
+            if (availableColours[random] === 'empty' || numberOfColours[random] >= 4) {//if max number of colour is reached, remove from available colours
                 availableColours.splice(random, 1);
                 numberOfColours.splice(random, 1);
             }
@@ -40,11 +48,29 @@ const board = {
         for (let i = 0; i < 25; i++) {
             const row = Math.floor(i / 5);
             const col = i % 5;
-            drawRect(col*this.squareSize + 1, row*this.squareSize + 1, this.squareSize, this.squareSize, this.boardState[row][col]);
+            const colour = (this.boardState[row][col] === 'empty') ? 'gray' : this.boardState[row][col];
+            drawRect(col*this.squareSize+1, row*this.squareSize+1,
+                this.squareSize-2, this.squareSize-2, colour);
         }
+    },
+    move: function(row, col) {
+        const emptyRow = this.emptySquareLocation[0];
+        const emptyCol = this.emptySquareLocation[1];
+        if (row === emptyRow && Math.abs(emptyCol - col) === 1 ||//if on same row and adjacent
+            col === emptyCol && Math.abs(emptyCol - col) === 1) {//if on same col and adjacent
+            swap(row, col, emptyRow, emptyCol);
+        }
+    },
+    swap: function(row1, col1, row2, col2) {
+        const temp = boardState[row1][col1];
+        boardState[row1][col1] = boardState[row2][col2];
+        boardState[row2][col2] = temp;
     }
 }
 
-drawRect(0, 0, 602, 602, 'black');//board outline
+//canvas.addEventListener("mousemove", userMove);
+
+drawRect(0, 0, 600, 600, 'black');//board outline
+
 board.randomize();
 board.show();
