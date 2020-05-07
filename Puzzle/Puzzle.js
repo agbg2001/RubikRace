@@ -49,10 +49,15 @@ const board = {
         for (let i = 0; i < 25; i++) {
             const row = Math.floor(i / 5);
             const col = i % 5;
-            const colour = (this.boardState[row][col] === 'empty') ? 'gray' : this.boardState[row][col];
+            const colour = (this.boardState[row][col] === 'empty') ? 'black' : this.boardState[row][col];
             drawRect(col*this.squareSize+1, row*this.squareSize+1,
                 this.squareSize-2, this.squareSize-2, colour);
         }
+        context.strokeStyle = "rgba(0, 0, 0, 0.3)"
+        context.lineWidth = 25;
+        context.beginPath();
+        context.rect(120, 120, 360, 360);
+        context.stroke();
     },
     move: function(row, col) {//attempts to make move
         const emptyRow = this.emptySquareLocation[0];
@@ -67,6 +72,9 @@ const board = {
         const temp = this.boardState[row1][col1];
         this.boardState[row1][col1] = this.boardState[row2][col2];
         this.boardState[row2][col2] = temp;
+    },
+    verify: function(goal) {//checks if middle 9 squares are same sequence as goal pattern
+        return false;
     }
 }
 
