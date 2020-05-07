@@ -3,19 +3,6 @@
 // no more than 4 of the same colours to be completable
 // colours : white, blue, red, orange, yellow, green
 
-// class Goal {
-//     constructor() {
-//         this.state = {
-//             boardState: []
-//         }
-//     }   
-
-//     randomize () {
-//         Math.floor( Math.random() * 6 )
-//     }
-
-// }
-
 const canvas = document.getElementById("goal-canvas");
 const context = canvas.getContext("2d");
 
@@ -31,7 +18,7 @@ function drawText(text, x, y, color = "black") {
 
 
 const goalBoard = {
-    goalSquareSize: 30,
+    goalSquareSize: 50,
     goalBoardState: [[],[],[]],
     randomize: function() {
         const availableColours = ['white', 'blue', 'red', 'orange', 'yellow', 'green'];
@@ -48,12 +35,17 @@ const goalBoard = {
                 frequency.splice(random, 1);
             }
         }
-        
+    },
+    show: function() {
+        for (let i = 0; i < 9; i++) {
+            const row = Math.floor(i / 3);
+            const col = i % 3;
+            drawRect(col*this.goalSquareSize + 1, row*this.goalSquareSize + 1, this.goalSquareSize, this.goalSquareSize, this.goalBoardState[row][col]);
+        }
     }
-
  }
 
  
-drawRect(0, 0, 92, 92, 'black');//board outline
-board.randomize();
-board.show();
+drawRect(0, 0, 152, 152, 'black');//board outline
+goalBoard.randomize();
+goalBoard.show();
