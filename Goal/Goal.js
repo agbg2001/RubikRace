@@ -18,34 +18,33 @@ function drawText(text, x, y, color = "black") {
 
 
 const goalBoard = {
-    goalSquareSize: 50,
+    goalSquareSize: 48,
     goalBoardState: [[],[],[]],
     randomize: function() {
-        const availableColours = ['white', 'blue', 'red', 'orange', 'yellow', 'green'];
+        const availableGoalColours = ['white', 'blue', 'red', 'orange', 'yellow', 'green'];
         const frequency = [0,0,0,0,0,0];
         for (let i = 0; i < 9; i ++) {
-            const random = Math.floor(Math.random() * availableColours.length);
+            const random = Math.floor(Math.random() * availableGoalColours.length);
             const row = Math.floor(i / 3);
             const col = i % 3;
-            this.goalBoardState[row][col] = availableColours[random];
+            this.goalBoardState[row][col] = availableGoalColours[random];
             frequency[random]++;
 
             if (frequency[random] >= 4 ) {
-                availableColours.splice(random, 1);
+                availableGoalColours.splice(random, 1);
                 frequency.splice(random, 1);
             }
         }
     },
     show: function() {
+        drawRect(0, 0, 146, 146, 'black');//board outline
         for (let i = 0; i < 9; i++) {
             const row = Math.floor(i / 3);
             const col = i % 3;
-            drawRect(col*this.goalSquareSize + 1, row*this.goalSquareSize + 1, this.goalSquareSize, this.goalSquareSize, this.goalBoardState[row][col]);
+            drawRect(col*this.goalSquareSize + 2, row*this.goalSquareSize + 2, this.goalSquareSize - 2, this.goalSquareSize - 2, this.goalBoardState[row][col]);
         }
     }
  }
 
- 
-drawRect(0, 0, 152, 152, 'black');//board outline
 goalBoard.randomize();
 goalBoard.show();
