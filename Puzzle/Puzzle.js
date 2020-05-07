@@ -62,10 +62,12 @@ const board = {
     move: function(row, col) {//attempts to make move
         const emptyRow = this.emptySquareLocation[0];
         const emptyCol = this.emptySquareLocation[1];
-        if (row === emptyRow && Math.abs(emptyCol - col) === 1 ||//if on same row and adjacent
-            col === emptyCol && Math.abs(emptyRow - row) === 1) {//if on same col and adjacent
-            this.swap(row, col, emptyRow, emptyCol);
-            this.emptySquareLocation = [row, col];
+        if (row >= 0 && row <=4 && col >= 0 && col <= 4) {
+            if (row === emptyRow && Math.abs(emptyCol - col) === 1 ||//if on same row and adjacent
+                col === emptyCol && Math.abs(emptyRow - row) === 1) {//if on same col and adjacent
+                this.swap(row, col, emptyRow, emptyCol);
+                this.emptySquareLocation = [row, col];
+            }
         }
     },
     swap: function(row1, col1, row2, col2) {//swaps 2 values in board state
