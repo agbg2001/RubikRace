@@ -45,6 +45,7 @@ const board = {
         }
     },
     show: function() {
+        drawRect(0, 0, 600, 600, 'black');//board outline
         for (let i = 0; i < 25; i++) {
             const row = Math.floor(i / 5);
             const col = i % 5;
@@ -53,24 +54,33 @@ const board = {
                 this.squareSize-2, this.squareSize-2, colour);
         }
     },
-    move: function(row, col) {
+    move: function(row, col) {//attempts to make move
         const emptyRow = this.emptySquareLocation[0];
         const emptyCol = this.emptySquareLocation[1];
         if (row === emptyRow && Math.abs(emptyCol - col) === 1 ||//if on same row and adjacent
-            col === emptyCol && Math.abs(emptyCol - col) === 1) {//if on same col and adjacent
-            swap(row, col, emptyRow, emptyCol);
+            col === emptyCol && Math.abs(emptyRow - row) === 1) {//if on same col and adjacent
+            this.swap(row, col, emptyRow, emptyCol);
+            this.emptySquareLocation = [row, col];
         }
     },
-    swap: function(row1, col1, row2, col2) {
-        const temp = boardState[row1][col1];
-        boardState[row1][col1] = boardState[row2][col2];
-        boardState[row2][col2] = temp;
+    swap: function(row1, col1, row2, col2) {//swaps 2 values in board state
+        const temp = this.boardState[row1][col1];
+        this.boardState[row1][col1] = this.boardState[row2][col2];
+        this.boardState[row2][col2] = temp;
     }
 }
 
-//canvas.addEventListener("mousemove", userMove);
+function mouseClicked(evt) {
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = evt.clientX - rect.left;
+    const mouseY = evt.clientY - rect.top;
+    const row = Math.floor(mouseY / board.squareSize)
+    const col = Math.floor(mouseX / board.squareSize)
+    board.move(row, col);
+    board.show();
+}
 
-drawRect(0, 0, 600, 600, 'black');//board outline
+canvas.addEventListener("click", mouseClicked);
 
 board.randomize();
 board.show();
