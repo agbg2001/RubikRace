@@ -7,17 +7,20 @@
     <title>Document</title>
 </head>
 <body>
-  
-    <div id="move-counter">0</div>
 
+    <div>
+        <h1 id="header">
+            Rubik's Race Solo
+        </h1>
 
-    <h1 id="header">
-        Rubik's Race
-    </h1>
+        <h3 id="disclaimer">
+            Disclaimer: We are in no way associated with Rubik's or University Games
+        </h3>
 
-    <h2 id="instructions">
-        //Here are the instructions//
-    </h2>
+        <h2 id="instructions">
+            Silde the pieces like a standard slider puzzle to get the inner 3x3 square to match the goal on the left! Try to get the lowest time possible.
+        </h2>
+    </div>
     
     <div>
         <div class="column">
@@ -30,12 +33,12 @@
 
                 <tr>
                     <th>Turns: </th>
-                    <td id="turns" colspan="2"></td>
+                    <td id="move-counter"" colspan="2"></td>
                 </tr>
             </table>
 
+            <p id="goal-text">Goal!</p>
             <div class="tooltip">
-                
                 <canvas id="goal-canvas" width="146" height="146"></canvas>
                 <span class="tooltiptext">Restart Game</span>
             </div>

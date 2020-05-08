@@ -110,6 +110,7 @@ const board = {
         this.timeStarted = 0;
         this.timeElapsed = 0;
         this.movesMade = 0;
+        document.getElementById("move-counter").innerHTML = board.movesMade;
     }
 }
 
