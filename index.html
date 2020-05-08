@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <div>
+    <div class="box">
         <h1 id="header">
             Rubik's Race Solo
         </h1>
@@ -18,7 +18,10 @@
         </h3>
 
         <h2 id="instructions">
-            Silde the pieces like a standard slider puzzle to get the inner 3x3 square to match the goal on the left! Try to get the lowest time possible.
+            Silde the pieces like a standard slider puzzle to get the inner 3x3 square to match the goal on the left!
+        </h2> 
+        <h2 id="instructions">
+            Try to get the lowest time possible.
         </h2>
     </div>
     
@@ -42,6 +45,24 @@
                 <canvas id="goal-canvas" width="146" height="146"></canvas>
                 <span class="tooltiptext">Restart Game</span>
             </div>
+
+            <table id="scoreboard">
+                <tr>
+                    <th class="scoreboard-header">Top Game</th>
+                </tr>
+                <tr>
+                    <td class="scoreboard-text">Time</td>
+                </tr>
+                <tr>
+                    <td id="top-time" class="scoreboard-data"></td>
+                </tr>
+                <tr>
+                    <td class="scoreboard-text">Turns</td>
+                </tr>
+                <tr>
+                    <td id="top-move" class="scoreboard-data""></td>
+                </tr>
+            </table>
         </div>
         
         
