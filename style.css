@@ -1,0 +1,100 @@
+#header {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 5vh;
+    margin: 2vh;
+}
+
+#instructions{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 200;
+    font-size: 3vh;
+    margin: 2vh;
+    
+}
+
+#disclaimer {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 100;
+    font-size: smaller;
+    margin: 2vh;
+    margin-left: 5vh;
+}
+
+#puzzle-canvas {
+    margin: 2vh;
+}
+
+#goal-canvas {
+    margin-top: 1vh;
+    margin-left: 2vh;
+    margin-right: 2vh;
+    margin-bottom: 2vh;
+}
+
+#goal-canvas:hover {
+    cursor: pointer;
+
+}
+
+#goal-text {
+    margin-top: 2vh;
+    text-align: center;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif; 
+}
+
+#timer {
+    min-width: 8vh;
+    text-align: right;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#move-counter {
+    min-width: 8vh;
+    text-align: right;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.column {
+    float: left;
+    
+}
+
+.box {
+    border-style: solid;
+    border-width: 0.2vh;
+    border-color: darkgrey;
+    border-radius: 1vh;
+
+    padding: 1vh;
+    margin: 2vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+  
+
+.tooltip .tooltiptext {
+visibility: hidden;
+background-color: grey;
+color: #fff;
+text-align: center;
+padding: 5px;
+border-radius: 6px;
+
+width: 120px;
+top: 95%;
+left: 90%;
+margin-left: -18vh;
+position: absolute;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+visibility: visible;
+}
