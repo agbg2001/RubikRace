@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet" />
     <title>Rubik's Race Solo</title>
+
+    <script src="Scripts/Puzzle.js" type="module" await></script>
+    <script src="Scripts/Goal.js" type="module" await></script>
 </head>
 <body>
+
+    
 
     <div class="box">
         <h1 id="header">
@@ -46,7 +51,7 @@
             <div id="goal-text">Goal!</div>
             <div class="tooltip">
                 <canvas id="goal-canvas" width="146" height="146"></canvas>
-                <span class="tooltiptext">Reset Boardgit</span>
+                <span class="tooltiptext">Reset Board</span>
             </div>
 
             <table id="scoreboard">
@@ -75,8 +80,7 @@
 
     </div>
 
-    <script src="Scripts/Puzzle.js" type="module"></script>
-    <script src="Scripts/Goal.js" type="module"></script>
+    
     
 </body>
 </html>
