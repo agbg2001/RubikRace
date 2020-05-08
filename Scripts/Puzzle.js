@@ -142,6 +142,10 @@ function updateScoreboard() {
         document.getElementById("top-time").innerHTML = scoreData[0];
         document.getElementById("top-move").innerHTML = scoreData[1];
     }
+    else {
+        document.getElementById("top-time").innerHTML = 'N/A';
+        document.getElementById("top-move").innerHTML = 'N/A';
+    }
 }
 
 setInterval(function() {//increment timer
