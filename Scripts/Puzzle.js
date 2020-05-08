@@ -34,6 +34,7 @@ const board = {
     complete: false,
     timeStarted: 0,
     timeElapsed: 0,
+    movesMade: 0,
     randomize: function() {
         const availableColours = ['empty', 'white', 'blue', 'red', 'orange', 'yellow', 'green'];//gray indicates empty square
         const numberOfColours = [0, 0, 0, 0, 0, 0, 0];
@@ -83,6 +84,7 @@ const board = {
                 if (!this.timeStarted) this.timeStarted = new Date();
                 this.swap(row, col, emptyRow, emptyCol);
                 this.emptySquareLocation = [row, col];
+                this.movesMade++;
             }
         }
     },
@@ -107,6 +109,7 @@ const board = {
         this.complete = false;
         this.timeStarted = 0;
         this.timeElapsed = 0;
+        this.movesMade = 0;
     }
 }
 
@@ -119,6 +122,7 @@ function mouseClicked(evt) {
     const col = Math.floor(mouseX / board.squareSize)
     board.move(row, col);
     board.show();
+    document.getElementById("move-counter").innerHTML = board.movesMade;
 }
 
 setInterval(function() {//increment timer
