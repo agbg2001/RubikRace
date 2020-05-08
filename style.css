@@ -154,3 +154,13 @@ visibility: visible;
     font-weight: 500;
     font-size: 3vh;
 }
+
+#outer {
+   width: 100%;
+   display: flex;
+}
+
+#inner {
+    margin: 0 auto;
+    display: inline-block;
+}
