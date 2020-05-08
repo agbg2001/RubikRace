@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,78 +10,80 @@
     <script src="Scripts/Puzzle.js" type="module" await></script>
     <script src="Scripts/Goal.js" type="module" await></script>
 </head>
+
 <body>
 
-    
+    <div id="outer">
+        <div id="inner">
+            <div class="box">
+                <h1 id="header">
+                    Rubik's Race Solo
+                </h1>
 
-    <div class="box">
-        <h1 id="header">
-            Rubik's Race Solo
-        </h1>
+                <h3 id="disclaimer">
+                    Disclaimer: We are in no way associated with Rubik's or University Games
+                </h3>
 
-        <h3 id="disclaimer">
-            Disclaimer: We are in no way associated with Rubik's or University Games
-        </h3>
-
-        <h2 id="instructions">
-            Slide the pieces like a standard slider puzzle to get the inner 3x3 square to match the goal on the left!
-        </h2> 
-        <h2 id="instructions">
-            Try to get the lowest time possible!
-        </h2>
-        <h2 id="instructions">
-            Reset the board by clicking on the goal.
-        </h2>
-    </div>
-    
-    <div>
-        <div class="column">
-            <table class="box">
-                <tr>
-                    <th>Timer: </th>
-                    <td id="timer"></td>
-                    <td> s</td>
-                </tr>
-
-                <tr>
-                    <th>Moves: </th>
-                    <td id="move-counter"" colspan="2"></td>
-                </tr>
-            </table>
-
-            <div id="goal-text">Goal!</div>
-            <div class="tooltip">
-                <canvas id="goal-canvas" width="146" height="146"></canvas>
-                <span class="tooltiptext">Reset Board</span>
+                <h2 id="instructions">
+                    Slide the pieces like a standard slider puzzle to get the inner 3x3 square to match the goal on the
+                    left!
+                </h2>
+                <h2 id="instructions">
+                    Try to get the lowest time possible!
+                </h2>
+                <h2 id="instructions">
+                    Reset the board by clicking on the goal.
+                </h2>
             </div>
 
-            <table id="scoreboard">
-                <tr>
-                    <th class="scoreboard-header">Top Game</th>
-                </tr>
-                <tr>
-                    <td class="scoreboard-text">Time</td>
-                </tr>
-                <tr>
-                    <td id="top-time" class="scoreboard-data"></td>
-                </tr>
-                <tr>
-                    <td class="scoreboard-text">Moves</td>
-                </tr>
-                <tr>
-                    <td id="top-move" class="scoreboard-data""></td>
-                </tr>
-            </table>
-        </div>
-        
-        
-        <div class="column">
-            <canvas id="puzzle-canvas" width="600" height="600"></canvas>
-        </div>
+            <div>
+                <div class="column">
+                    <table class="box">
+                        <tr>
+                            <th>Timer: </th>
+                            <td id="timer"></td>
+                            <td> s</td>
+                        </tr>
 
+                        <tr>
+                            <th>Moves: </th>
+                            <td id="move-counter"" colspan=" 2"></td>
+                        </tr>
+                    </table>
+
+                    <div id="goal-text">Goal!</div>
+                    <div class="tooltip">
+                        <canvas id="goal-canvas" width="146" height="146"></canvas>
+                        <span class="tooltiptext">Reset Board</span>
+                    </div>
+
+                    <table id="scoreboard">
+                        <tr>
+                            <th class="scoreboard-header">Top Game</th>
+                        </tr>
+                        <tr>
+                            <td class="scoreboard-text">Time</td>
+                        </tr>
+                        <tr>
+                            <td id="top-time" class="scoreboard-data"></td>
+                        </tr>
+                        <tr>
+                            <td class="scoreboard-text">Moves</td>
+                        </tr>
+                        <tr>
+                            <td id="top-move" class="scoreboard-data""></td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class=" column">
+                    <canvas id="puzzle-canvas" width="600" height="600"></canvas>
+                </div>
+
+            </div>
+        </div>
     </div>
 
-    
-    
 </body>
+
 </html>
