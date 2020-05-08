@@ -137,9 +137,15 @@ function mouseClicked(evt) {
 }
 
 function updateScoreboard() {
-    const scoreData = board.getHighscore().split(';');
-    document.getElementById("top-time").innerHTML = scoreData[0];
-    document.getElementById("top-move").innerHTML = scoreData[1];
+    if (board.getHighscore()) {
+        const scoreData = board.getHighscore().split(';');
+        document.getElementById("top-time").innerHTML = scoreData[0];
+        document.getElementById("top-move").innerHTML = scoreData[1];
+    }
+    else {
+        document.getElementById("top-time").innerHTML = 'N/A';
+        document.getElementById("top-move").innerHTML = 'N/A';
+    }
 }
 
 setInterval(function() {//increment timer
