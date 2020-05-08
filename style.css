@@ -25,13 +25,12 @@
     margin: 2vh;
     border-style: solid;
     border-width: 1vh;
-    border-radius: 4vh;
+    border-radius: 3vh;
 }
 
 #goal-canvas {
     margin-left: 2vh;
     margin-right: 2vh;
-    margin-bottom: 2vh;
 }
 
 #goal-canvas:hover {
@@ -50,9 +49,12 @@
     border-style: solid;
     border-width: 0.2vh;
     border-color: darkgrey;
-    border-radius: 1vh;
+    border-top-right-radius: 1vh;
+    border-top-left-radius: 1vh;
 
     padding: 1vh;
+
+    max-width: 128px;
 }
 
 #timer {
@@ -101,7 +103,7 @@ padding: 5px;
 border-radius: 6px;
 
 width: 120px;
-top: 95%;
+top: 105%;
 left: 90%;
 margin-left: -18vh;
 position: absolute;
@@ -114,7 +116,7 @@ visibility: visible;
 
 #scoreboard {
     margin: 2vh;
-    margin-top: 4vh;
+    margin-top: 8vh;
     text-align: center;
 
     border-style: solid;
@@ -126,18 +128,20 @@ visibility: visible;
 
     font-family: Arial, Helvetica, sans-serif;
 
-    max-width: 770px;
+   min-width: 150px;
 }
 
 .scoreboard-header {
     margin: 1vh;
+    margin-bottom: 3vh;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 2vh;
+    font-size: 3vh;
     font-weight: 600;
 }
 
 .scoreboard-text {
     margin: 1vh;
+    margin-top: 3vh;
     font-family: Arial, Helvetica, sans-serif;
     font-size: small;
 }
@@ -146,4 +150,5 @@ visibility: visible;
     margin: 1vh;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 500;
+    font-size: 3vh;
 }
