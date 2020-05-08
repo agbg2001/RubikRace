@@ -1,0 +1,60 @@
+#puzzle-canvas {
+    
+}
+
+#goal-canvas {
+    margin: 2vh;
+}
+
+#goal-canvas:hover {
+    cursor: pointer;
+
+}
+
+#timer {
+    min-width: 8vh;
+    text-align: right;
+}
+
+.column {
+    float: left;
+    
+}
+
+.box {
+    border-style: solid;
+    border-width: 0.2vh;
+    border-color: darkgrey;
+    border-radius: 1vh;
+
+    padding: 1vh;
+    margin: 2vh;
+
+    
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+  
+
+.tooltip .tooltiptext {
+visibility: hidden;
+background-color: grey;
+color: #fff;
+text-align: center;
+padding: 5px;
+border-radius: 6px;
+
+width: 120px;
+top: 95%;
+left: 90%;
+margin-left: -18vh;
+position: absolute;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+visibility: visible;
+}
