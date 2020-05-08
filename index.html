@@ -3,13 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" />
     <title>Document</title>
 </head>
 <body>
-    <canvas id="puzzle-canvas" width="600" height="600"></canvas>
+    <h1 id="header">
+        Rubik's Race
+    </h1>
+
+    <h2 id="instructions">
+        //Here are the instructions//
+    </h2>
+    
+    <div>
+        <div class="column">
+            <table class="box">
+                <tr>
+                    <th>Timer: </th>
+                    <td id="timer"></td>
+                    <td> s</td>
+                </tr>
+
+                <tr>
+                    <th>Turns: </th>
+                    <td id="turns" colspan="2"></td>
+                </tr>
+            </table>
+
+            <div class="tooltip">
+                
+                <canvas id="goal-canvas" width="146" height="146"></canvas>
+                <span class="tooltiptext">Restart Game</span>
+            </div>
+        </div>
+        
+        
+        <div class="column">
+            <canvas id="puzzle-canvas" width="600" height="600"></canvas>
+        </div>
+
+    </div>
+
     <script src="Scripts/Puzzle.js" type="module"></script>
-    <canvas id="goal-canvas" width="146" height="146"></canvas>
     <script src="Scripts/Goal.js" type="module"></script>
-    <p id="timer"></p>
+    
 </body>
 </html>
