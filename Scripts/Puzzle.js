@@ -68,8 +68,7 @@ const board = {
         }
         drawRectOutline(120, 120, 360, 360, 'rgba(0, 0, 0, 0.3)', 25);//middle 9 squares outline
 
-        this.complete = this.matches(goalBoard);//winning message
-        if (this.complete) {
+        if (this.complete) {//winning message
             drawRect(190, 270, 220, 60, 'white');
             drawRectOutline(190, 270, 220, 60, 'black', 5);
             drawText("YOU WIN", 200, 320, 50);
@@ -85,6 +84,11 @@ const board = {
                 this.swap(row, col, emptyRow, emptyCol);
                 this.emptySquareLocation = [row, col];
                 this.movesMade++;
+                this.complete = this.matches(goalBoard);
+                if (this.complete) {
+                    this.saveHighscore();
+                    updateScoreboard();
+                }
             }
         }
     },
@@ -110,6 +114,13 @@ const board = {
         this.timeStarted = 0;
         this.timeElapsed = 0;
         this.movesMade = 0;
+    },
+    saveHighscore: function() {
+        if (!this.getHighscore() || this.timeElapsed < this.getHighscore().split(';')[0])//if no previous data stored or if better time than previous
+            localStorage.setItem('highscoreByTime', `${this.timeElapsed};${this.movesMade}`)
+    },
+    getHighscore: function() {
+        return localStorage.getItem('highscoreByTime');
     }
 }
 
@@ -125,13 +136,21 @@ function mouseClicked(evt) {
     document.getElementById("move-counter").innerHTML = board.movesMade;
 }
 
+function updateScoreboard() {
+    const scoreData = board.getHighscore().split(';');
+    document.getElementById("top-time").innerHTML = scoreData[0];
+    document.getElementById("top-move").innerHTML = scoreData[1];
+}
+
 setInterval(function() {//increment timer
     if (board.timeStarted && !board.complete)
         board.timeElapsed = (new Date() - board.timeStarted)/1000;
     document.getElementById("timer").innerHTML = board.timeElapsed;
+    document.getElementById("move-counter").innerHTML = board.movesMade;
 }, 20);
 
 board.reset();
 board.show();
+updateScoreboard();
 
 export default board;
