@@ -3,28 +3,24 @@
 // 4 of each colour (we should probably designate a value for every colour or smth)
 // one open slot for movement 
 // center 3 by 3 needs to check against the goal
-// colours : white, blue, red, orange, yellow, green
 
-import goalBoard from "./Goal.js";
 
-const canvas = document.getElementById("puzzle-canvas");
-const context = canvas.getContext("2d");
 
-function drawRect(x, y, w, h, color = "black") {
-    context.fillStyle = color;
-    context.fillRect(x, y, w, h);
+function pdrawRect(x, y, w, h, color = "black") {
+    pcontext.fillStyle = color;
+    pcontext.fillRect(x, y, w, h);
 }
 function drawRectOutline(x, y, w, h, color = "black", thickness = 1) {
-    context.strokeStyle = color;
-    context.lineWidth = thickness;
-    context.beginPath();
-    context.rect(x, y, w, h);
-    context.stroke();
+    pcontext.strokeStyle = color;
+    pcontext.lineWidth = thickness;
+    pcontext.beginPath();
+    pcontext.rect(x, y, w, h);
+    pcontext.stroke();
 }
-function drawText(text, x, y, size = 20, color = "black", font = "Trebuchet MS") {
-    context.fillStyle = color;
-    context.font = `${size}px ${font}`;
-    context.fillText(text, x, y);
+function pdrawText(text, x, y, size = 20, color = "black", font = "Trebuchet MS") {
+    pcontext.fillStyle = color;
+    pcontext.font = `${size}px ${font}`;
+    pcontext.fillText(text, x, y);
 }
 
 const board = {
@@ -58,20 +54,20 @@ const board = {
         }
     },
     show: function() {
-        drawRect(0, 0, 600, 600, 'black');//board outline
+        pdrawRect(0, 0, 600, 600, 'black');//board outline
         for (let i = 0; i < 25; i++) {
             const row = Math.floor(i / 5);
             const col = i % 5;
             const colour = (this.boardState[row][col] === 'empty') ? 'black' : this.boardState[row][col];
-            drawRect(col*this.squareSize+1, row*this.squareSize+1,
+            pdrawRect(col*this.squareSize+1, row*this.squareSize+1,
                 this.squareSize-2, this.squareSize-2, colour);
         }
         drawRectOutline(120, 120, 360, 360, 'rgba(0, 0, 0, 0.3)', 25);//middle 9 squares outline
 
         if (this.complete) {//winning message
-            drawRect(190, 270, 220, 60, 'white');
+            pdrawRect(190, 270, 220, 60, 'white');
             drawRectOutline(190, 270, 220, 60, 'black', 5);
-            drawText("YOU WIN", 200, 320, 50);
+            pdrawText("YOU WIN", 200, 320, 50);
         }
     },
     move: function(row, col) {//attempts to make move
@@ -124,9 +120,8 @@ const board = {
     }
 }
 
-canvas.addEventListener("click", mouseClicked);
-function mouseClicked(evt) {
-    const rect = canvas.getBoundingClientRect();
+function pmouseClicked(evt) {
+    const rect = pcanvas.getBoundingClientRect();
     const mouseX = evt.clientX - rect.left;
     const mouseY = evt.clientY - rect.top;
     const row = Math.floor(mouseY / board.squareSize)
@@ -155,11 +150,9 @@ setInterval(function() {//increment timer
     document.getElementById("move-counter").innerHTML = board.movesMade;
 }, 20);
 
-board.reset();
-board.show();
-updateScoreboard();
 
 
 
-export default board;
+
+//export default board;
 

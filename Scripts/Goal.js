@@ -2,10 +2,28 @@
 // 9 ranomized sections with 6 possible colours
 // no more than 4 of the same colours to be completable
 // colours : white, blue, red, orange, yellow, green
-import board from "./Puzzle.js";
+//import board from "./Puzzle.js";
 
-const canvas = document.getElementById("goal-canvas");
-const context = canvas.getContext("2d");
+let canvas, context, pcanvas, pcontext
+
+window.onload = function(){
+    canvas = document.getElementById("goal-canvas");
+    context = canvas.getContext("2d");
+
+    canvas.addEventListener("click", mouseClicked);
+    goalBoard.randomize();
+    goalBoard.show();
+
+    pcanvas = document.getElementById("puzzle-canvas");
+    pcontext = pcanvas.getContext("2d");
+
+    pcanvas.addEventListener("click", pmouseClicked);
+
+    board.reset();
+    board.show();
+    updateScoreboard();
+
+}
 
 function drawRect(x, y, w, h, color = "black") {
     context.fillStyle = color;
@@ -47,7 +65,7 @@ const goalBoard = {
     }
 }
 
-canvas.addEventListener("click", mouseClicked);
+
 function mouseClicked(evt) {
     goalBoard.randomize();
     goalBoard.show();
@@ -55,7 +73,5 @@ function mouseClicked(evt) {
     board.show();
 }
 
-goalBoard.randomize();
-goalBoard.show();
 
-export default goalBoard;
+//export default goalBoard;
